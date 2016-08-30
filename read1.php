@@ -61,9 +61,9 @@ function get_mime_type($structure) {
     }
     return "TEXT/PLAIN";
 }
-require_once 'rc4.php';
-$cipher=getBody($uid,$imap1);
-$plain=rc4($_POST['captcha'],$cipher);
+//require_once 'rc4.php';
+$plain=getBody($uid,$imap1);
+//$plain=rc4($_POST['captcha'],$cipher);
 
 echo '<div id="body"><h4><b>'.($plain).'<b><h4></div>';
 
@@ -106,7 +106,7 @@ $attachments = getAttachments($imap1, $uid, $mailStruct, "");
 if ($attachments['is_attachment']==1) {
     
     echo "<br>Attachments: ";
-    for($i=1; $i<sizeof($attachments) ; $i++) 
+    for($i=0; $i<sizeof($attachments) ; $i++) 
     {
 
     echo '<a onclick = window.open("gmail-imap.php") href="gmail-imap.php?func=' . $func . '&folder=' . $folder . '&uid=' . $uid .
@@ -185,7 +185,7 @@ if ($attachments['is_attachment']==1) {
         //echo "<br>".sizeof($attachments)."</br>";
         //foreach($attachments as $attachment)
         //showing only the first attachment,i.e.,captcha image......
-        for($i=2; $i < sizeof($attachments); $i++)
+        for($i=0; $i < sizeof($attachments); $i++)
         {
             if($attachments[$i]['is_attachment'] == 1)
             {

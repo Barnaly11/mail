@@ -61,65 +61,12 @@ function get_mime_type($structure) {
     }
     return "TEXT/PLAIN";
 }
-require_once 'rc4.php';
-$cipher=getBody($uid,$imap1);
-$plain=rc4($_POST['captcha'],$cipher);
-
-echo '<div id="body"><h4><b>'.($plain).'<b><h4></div>';
-
-function getAttachments($imap, $mailNum, $part, $partNum) {
-    $attachments = array();
-
-    if (isset($part->parts)) {
-        foreach ($part->parts as $key => $subpart) {
-            if($partNum != "") {
-                $newPartNum = $partNum . "." . ($key + 1);
-            }
-            else {
-                $newPartNum = ($key+1);
-            }
-            $result = getAttachments($imap, $mailNum, $subpart,
-                $newPartNum);
-            if (count($result) != 0) {
-                 array_push($attachments, $result);
-             }
-        }
-    }
-    else if (isset($part->disposition)) {
-        if ($part->disposition == "ATTACHMENT") {
-            $partStruct = imap_bodystruct($imap,FT_UID,
-                $partNum);
-            $attachmentDetails = array(
-                "name"    => $part->dparameters[0]->value,
-                "partNum" => $partNum,
-                "enc"     => $partStruct->encoding
-            );
-            return $attachmentDetails;
-        }
-    }
-
-    return $attachments;
-}
-$mailStruct = imap_fetchstructure($imap1, $uid,FT_UID);
-$attachments = getAttachments($imap1, $uid, $mailStruct, "");
-//echo "<br>".sizeof($attachments);
-if ($attachments['is_attachment']==1) {
-    
-    echo "<br>Attachments: ";
-    for($i=1; $i<sizeof($attachments) ; $i++) 
-    {
-
-    echo '<a onclick = window.open("gmail-imap.php") href="gmail-imap.php?func=' . $func . '&folder=' . $folder . '&uid=' . $uid .
-        '&part=' . $attachments[$i]["partNum"] . '&enc=' . $attachments[$i]["enc"] . '">' .
-        $attachments[$i]["name"]." <br> " . "</a>";
-    }
-}
-
-// displaying the attachment(s);
-
-
-        $overview = imap_fetch_overview($imap1,$uid,0);
-        //echo "<br>".$overview."</br>";
+echo '<div id="captchabody">';
+//echo "<br><b>Email Body:</b></br>";
+//echo getBody($uid,$imap1);
+echo "<br>Captcha</br>";
+ $overview = imap_fetch_overview($imap1,$uid,0);
+        
         /* get mail message */
         $message = imap_fetchbody($imap1, $uid, 2, FT_UID);
         
@@ -184,8 +131,8 @@ if ($attachments['is_attachment']==1) {
         
         //echo "<br>".sizeof($attachments)."</br>";
         //foreach($attachments as $attachment)
-        //showing only the first attachment,i.e.,captcha image......
-        for($i=2; $i < sizeof($attachments); $i++)
+//showing only the first attachment,i.e.,captcha image......
+        for($i=1; $i < 2; $i++)
         {
             if($attachments[$i]['is_attachment'] == 1)
             {
@@ -199,54 +146,70 @@ if ($attachments['is_attachment']==1) {
                 //echo "<img src=".$filename." width=20% />";
                 //fclose($f);*/
                 //echo "\n";
-                echo '<a onclick = window.open("gmail-imap.php") href="gmail-imap.php?func=' . $func . '&folder=' . $folder . '&uid=' . $uid .
-    '&part=' . $attachments[$i]["partNum"] . '&enc=' . $attachments[$i]["enc"] . '">';
-            echo '<div id="img">';
-                echo "<img src=".$attachments[$i]['filename'] ." display=block width=20% />";
-                echo '<br><p>'.$attachments[$i]["name"].'</p></br>';
-                echo "</a>";
-            echo '</div>';
+               // echo '<a onclick = window.open("gmail-imap.php") href="gmail-imap.php?func=' . $func . '&folder=' . $folder . '&uid=' . $uid .'&part=' . $attachments[$i]["partNum"] . '&enc=' . $attachments[$i]["enc"] . '">';
+                echo "<br>";
+                echo "<br><img src=".$attachments[$i]['filename'] ." display=block width=100% />";
+
+                //echo "</a><";
+        		echo "</br></div>";
             }
         
         }
+
+
+
 ?>
-<!DOCTYPE html>
 <html>
-<head>
-    <title>Email Body</title>
-</head>
-<style>
-    body{
-            background: #333333; /* For browsers that do not support gradients */
-            background: -webkit-linear-gradient( to left , #333333,  #00cc66); /* For Safari 5.1 to 6.0 */
-            background: -o-linear-gradient(right , #333333,  #00cc66); /* For Opera 11.1 to 12.0 */
-            background: -moz-linear-gradient(right , #333333,  #00cc66); /* For Firefox 3.6 to 15 */
-            background: linear-gradient( to right , #333333,  #00cc66); /* Standard syntax */
-        }
-    #body{
-        color: white;
-        opacity: 0.6;
-        background-color: black;
-        padding: 2%;
-        border-left:ridge 40px green;
-    }
-    a{
-        text-decoration: none;.
-        color: black;
-    }
-    p{
-        color: black;
-    }
-    #img{
-        opacity: 0.9;
-        display: block;
-        background-color:transparent;
-        margin: 0px;
-        padding: 5%;
+   <head>
+      
+      <title>Captcha</title>
+   </head>
 
-    }
-</style>
-<body>
+   <style type="text/css">
+   		body{
+   			background: #333333; /* For browsers that do not support gradients */
+  			background: -webkit-linear-gradient( to left , #333333,  #003d99); /* For Safari 5.1 to 6.0 */
+			background: -o-linear-gradient(right , #333333,  #003d99); /* For Opera 11.1 to 12.0 */
+			background: -moz-linear-gradient(right , #333333,  #003d99); /* For Firefox 3.6 to 15 */
+			background: linear-gradient( to right , #333333,  #003d99); /* Standard syntax */
+   		}
 
-</body>
+   		#captchabody{
+   			opacity: 0.8;
+   			padding: 10px;
+   			
+   			align-items: center;
+   			margin-top: 15%;
+   			margin-left: 35%;
+   			margin-right: 38%;
+   			background-color: white;
+   			padding-left: 4%;
+   			padding-right:4%;
+   		}
+
+   		#captcha{
+   			opacity: 0.8;
+   			left:center;
+   			padding:30px;
+   			padding-left: 4%;
+   			margin-left: 35%;
+   			margin-right: 38%;
+   			background-color: black;
+   		}
+   		#captcha:hover{
+   			opacity: 1;
+   		}
+   </style>
+
+   <body>
+   		<div id="captcha">
+      <!--<p>Enter the captcha to view the email..</p>-->
+      
+      <?php echo'<form method="post" action="read.php?folder=' . $folder . '&uid=' . $uid . '&func=read">' ;
+      	echo '<input type="text" name="captcha" placeholder="Enter the captcha" />';
+        echo '<br></br><input type="submit" value="Send" />';
+      echo "</form>";
+      ?>
+      </div>
+   </body>
 </html>

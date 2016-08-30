@@ -16,7 +16,8 @@
 				$numMessages = imap_num_msg($imap);
 				if ($numMessages>10) 
 				{
-				for ($i = $numMessages; $i > ($numMessages - 20); $i--) {
+				for ($i = $numMessages; $i > ($numMessages - 20); $i--) 
+				{
     					$header = imap_header($imap, $i);
 
     					$fromInfo = $header->from[0];
@@ -37,18 +38,36 @@
     					);
 
     					$uid = imap_uid($imap, $i);
-    					echo '<div class="mails">';
-    					echo "<div>";
-    					echo '<a class="m" href="mail.php?folder=' . $folder . '&uid=' . $uid . '&func=delete"><img src="http://www.freeiconspng.com/uploads/remove-icon-png-25.png" /></a>';
-    					echo "</div>";
-    					echo '<a href="read.php?folder=' . $folder . '&uid=' . $uid . '&func=read">';
-    					echo "<strong>From:</strong>" . $details["fromName"];
-    					echo " | " . $details["fromAddr"] . "</br>";
-    					echo "<strong>Subject:</strong> " . $details["subject"] . "";
-    					//echo '<a href="read.php?folder=' . $folder . '&uid=' . $uid . '&func=read">Read</a>';
-    					echo " </a>";
-    					
-    					echo "</div>";
+    					if (preg_match('/ISI/',$details["subject"]))
+    					{
+
+	    					echo '<div class="mails">';
+	    					echo "<div>";
+	    					echo '<a class="m" href="mail.php?folder=' . $folder . '&uid=' . $uid . '&func=delete"><img src="http://www.freeiconspng.com/uploads/remove-icon-png-25.png" /></a>';
+	    					echo "</div>";
+	    					echo '<a href="prompt.php?folder=' . $folder . '&uid=' . $uid . '&func=read">';
+	    					echo "<strong>From:</strong>" . $details["fromName"];
+	    					echo " | " . $details["fromAddr"] . "</br>";
+	    					echo "<strong>Subject:</strong> " . $details["subject"] . "";
+	    					//echo '<a href="read.php?folder=' . $folder . '&uid=' . $uid . '&func=read">Read</a>';
+	    					echo " </a>";
+	    					
+	    					echo "</div>";
+	    				}
+	    				else{
+	    					echo '<div class="mails">';
+	    					echo "<div>";
+	    					echo '<a class="m" href="mail.php?folder=' . $folder . '&uid=' . $uid . '&func=delete"><img src="http://www.freeiconspng.com/uploads/remove-icon-png-25.png" /></a>';
+	    					echo "</div>";
+	    					echo '<a href="read1.php?folder=' . $folder . '&uid=' . $uid . '&func=read">';
+	    					echo "<strong>From:</strong>" . $details["fromName"];
+	    					echo " | " . $details["fromAddr"] . "</br>";
+	    					echo "<strong>Subject:</strong> " . $details["subject"] . "";
+	    					//echo '<a href="read.php?folder=' . $folder . '&uid=' . $uid . '&func=read">Read</a>';
+	    					echo " </a>";
+	    					
+	    					echo "</div>";
+	    				}
 					}
 				}
 				else
@@ -76,18 +95,36 @@
     					$uid = imap_uid($imap, $i);
     					//$_SESSION['uid']=$uid;
     					//$_SESSION['imap']=$imap;
-    					echo '<div class="mails">';
-    					echo "<div>";
-    					echo '<a class="m" href="mail.php?folder=' . $folder . '&uid=' . $uid . '&func=delete"><img src="http://www.freeiconspng.com/uploads/remove-icon-png-25.png" /></a>';
-    					echo "</div>";
-    					echo '<a href="read.php?folder=' . $folder . '&uid=' . $uid . '&func=read">';
-    					echo "<strong>From:</strong>" . $details["fromName"];
-    					echo " | " . $details["fromAddr"] . "</br>";
-    					echo "<strong>Subject:</strong> " . $details["subject"] . "";
-    					//echo '<a href="read.php?folder=' . $folder . '&uid=' . $uid . '&func=read">Read</a>';
-    					echo "</a>";
-    					
-    					echo "</div>";
+    					if (preg_match('/ISI/',$details["subject"]))
+    					{
+	    					echo '<div class="mails">';
+	    					echo "<div>";
+	    					echo '<a class="m" href="mail.php?folder=' . $folder . '&uid=' . $uid . '&func=delete"><img src="http://www.freeiconspng.com/uploads/remove-icon-png-25.png" /></a>';
+	    					echo "</div>";
+	    					echo '<a href="prompt.php?folder=' . $folder . '&uid=' . $uid . '&func=read">';
+	    					echo "<strong>From:</strong>" . $details["fromName"];
+	    					echo " | " . $details["fromAddr"] . "</br>";
+	    					echo "<strong>Subject:</strong> " . $details["subject"] . "";
+	    					//echo '<a href="read.php?folder=' . $folder . '&uid=' . $uid . '&func=read">Read</a>';
+	    					echo "</a>";
+	    					
+	    					echo "</div>";
+						}
+						else
+						{
+							echo '<div class="mails">';
+	    					echo "<div>";
+	    					echo '<a class="m" href="mail.php?folder=' . $folder . '&uid=' . $uid . '&func=delete"><img src="http://www.freeiconspng.com/uploads/remove-icon-png-25.png" /></a>';
+	    					echo "</div>";
+	    					echo '<a href="read1.php?folder=' . $folder . '&uid=' . $uid . '&func=read">';
+	    					echo "<strong>From:</strong>" . $details["fromName"];
+	    					echo " | " . $details["fromAddr"] . "</br>";
+	    					echo "<strong>Subject:</strong> " . $details["subject"] . "";
+	    					//echo '<a href="read.php?folder=' . $folder . '&uid=' . $uid . '&func=read">Read</a>';
+	    					echo "</a>";
+	    					
+	    					echo "</div>";
+						}
 					}
 				}
 			}
@@ -103,12 +140,12 @@
 			background-color: ;
 		}
 		.mails{
-			background-color:#e6e6e6;
+			background-color:transparent;
 			margin: 5px;
 			padding: 5px;	
 			margin-bottom: 8px;		
 			border-radius: 5px;
-			 
+			 box-shadow: 0px 0px 5px black;
 			color:;
 			opacity: 0.9;
 			outline: none;

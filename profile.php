@@ -118,6 +118,6 @@ echo "</ul>";
 		}
 	</style>
 	<body>
-	<iframe src="r.php" name="iframe1" scrolling="auto"; style="float:right; width:79.1%; height: 100%; background-color:; position: absolute;top:10%; left: 20%; "></iframe>
+	<iframe src="r.php" name="iframe1" scrolling="auto"  style="float:right; width:79.1%; height: 100%; background-color:; position: absolute;top:10%; left: 20%; "></iframe>
 	</body>
 </html>
