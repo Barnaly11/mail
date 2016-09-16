@@ -18,41 +18,64 @@ session_start();
 		}
 		#input{
 			padding-top: 5%;
-			padding-left: 40%;
+			padding: 5px;
+			margin-left: 35%;
+			margin-right: 35%;
+			padding-left:2%; 
 			background-color: black;
 			color: white;
-			opacity: 0.8;
+			opacity: 1;
 			display: block;
 			top:2px;
 
 		}
+		.rs{
+			width: 80%;
+			margin: 0px;
+			border-left:solid 10px #ff3333;
+		}
 		#submit{
 			background-color: white;
-			opacity: 0.8;
+			opacity: 1;
 			display: block;
-			padding-left: 40%;
+			margin-left: 35%;
+			margin-right: 35%;
+			padding-left: 10%;
+
 		}
 		#submit input{
 			background-color: black;
 			color: white;
+			padding: 5px;
+			margin: 10px;
+			text-align: center;
+			
 		}
 		input{
 			border-radius: 5px;
 			padding: 10px;
-			margin: 5px;
+			/*margin: 5px;*/
 			width: 30%;
+			border-left: 10px;
 		}
 		textarea{
-			border-radius: 5px;
+			margin-top: 5px;
 			padding: 10px;
+			border-radius: 5px;
+			border-left:solid 10px grey;
+
+		}
+		#form{
+			
+			margin-top: 5%;
 		}
 	</style>
 	<body>
-		<form action="mm.php" method="post" enctype="multipart/form-data">
+		<form id="form" action="mm.php" method="post" enctype="multipart/form-data">
 			<div id="input">
-			<br><input type="email" name="rmail" placeholder="Receiver's email" />
-			<br><input type="text" name="subject" placeholder="Subject" />
-			<br><textarea type="text" rows=10 columns=40 name=" body" placeholder="Body"></textarea> 
+			<br><input class="rs" type="email" name="rmail" placeholder="Receiver's email" />
+			<br><input class="rs" type="text" name="subject" placeholder="Subject" />
+			<br><textarea type="text" rows=10 cols=35 name=" body" placeholder="Body"></textarea> 
 			<br><input type="file" name="attachment[]" multiple />
 			</div>
 			<div id="submit">

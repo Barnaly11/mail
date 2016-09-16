@@ -7,9 +7,8 @@
 	$mailboxPath='{imap.gmail.com:993/imap/ssl/novalidate-cert}';
 				if(!imap_reopen($imap,$mailboxPath.$folder))
 				{
-					echo "error!!";
-					echo "folder".$_SESSION['u'];
-					print_r($_SESSION);
+					echo "--------------error!!--------------";
+					
 				}
 				else
 				{
@@ -140,24 +139,27 @@
 			background-color: ;
 		}
 		.mails{
-			background-color:transparent;
 			margin: 5px;
 			padding: 5px;	
 			margin-bottom: 8px;		
 			border-radius: 5px;
-			 box-shadow: 0px 0px 5px black;
-			color:;
+			/* box-shadow: 0px 0px 5px black;*/
+			background-color: white;
+			color:black;
 			opacity: 0.9;
 			outline: none;
 			color: black;
-			border-left: ridge 15px black;
+			border-left: solid 15px black;
+			border-bottom: solid 5px white;
+			border-top: solid 5px white;
+			background-color:;
 		}
 		.mails:hover{
 			box-shadow: 0px 0px 10px black;
 			background-color: #cccccc;
 		}
 		.mails div{
-			top:0px;
+			
 			margin: 0px;
 			padding: 0px;
 			perspective-origin: -10px;
@@ -167,12 +169,11 @@
 		img{
 			width: 20px;
 			height: 20px;
-			//box-shadow: 2px 2px 5px black;
+			/*box-shadow: 2px 2px 5px black;*/
 		}
 		.m{
 			float: right;
-			color:black;
-			color: black;
+			
 		}
 		a{
 			text-decoration: none;
