@@ -225,10 +225,10 @@ if ($attachments['is_attachment']==1) {
         }
     #body{
         color: white;
-        opacity: 0.6;
+        opacity: 1;
         background-color: black;
         padding: 2%;
-        border-left:ridge 40px green;
+        border-left : solid 40px #333333;
     }
     a{
         text-decoration: none;.
